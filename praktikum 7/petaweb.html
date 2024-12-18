@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Peta</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+     <style>
+        #map { height: 800px; }
+     </style>
+      <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+</head>
+<body>
+    <div id="map"></div>
+    <script>
+        var map = L.map('map').setView([-6.3529,106.8326], 13);
+
+        var aoi = {
+        "type": "FeatureCollection",
+        "features": [
+            {
+            "type": "Feature",
+            "properties": {
+                "kampus": "STT Terpadu Nurul Fikri Kampus B",
+                "kota": "Srengseng Sawah Jaksel"
+            },
+            "geometry": {
+                "coordinates": [
+                106.83269206627779,
+                -6.352854830407438
+                ],
+                "type": "Point"
+            }
+            },
+            {
+            "type": "Feature",
+            "properties": {
+                "kampus": "STT Terpadu Nurul Fikri Kampus A",
+                "kota": "Kelapa dua Depok"
+            },
+            "geometry": {
+                "coordinates": [
+                106.8441434545104,
+                -6.362239274308891
+                ],
+                "type": "Point"
+            }
+            },
+            {
+            "type": "Feature",
+            "properties": {
+                "kampus": "Universitas Indonesia",
+                "kota": "Depok"
+            },
+            "geometry": {
+                "coordinates": [
+                106.8271956669576,
+                -6.361332275590783
+                ],
+                "type": "Point"
+            }
+            },
+            {
+            "type": "Feature",
+            "properties": {
+                "kampus": "Universitas Pancasila",
+                "kota": "Lenteng Agung Jaksel"
+            },
+            "geometry": {
+                "coordinates": [
+                106.83307695910634,
+                -6.33924350946036
+                ],
+                "type": "Point"
+            }
+            },
+            {
+            "type": "Feature",
+            "properties": {
+                "kampus": "Politeknik Negeri Media Kreatif",
+                "kota": "Srengseng Sawah Jaksel"
+            },
+            "geometry": {
+                "coordinates": [
+                106.8274270256502,
+                -6.346568272536061
+                ],
+                "type": "Point"
+            }
+            },
+            {
+            "type": "Feature",
+            "properties": {
+                "kampus": "Universitas Gunadarma",
+                "kota": " Kelapa Dua Depok"
+            },
+            "geometry": {
+                "coordinates": [
+                106.84149509031585,
+                -6.353963566352874
+                ],
+                "type": "Point"
+            }
+            }
+        ]
+        }
+
+        L.geoJSON(aoi, {
+        pointToLayer: function (feature, latlng) {
+            return L.marker(latlng);
+        },
+
+        onEachFeature: function (feature, layer) {
+        layer.bindPopup(feature.properties.kampus + '<br>' + feature.properties.kota);
+        }
+        }).addTo(map);
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+    </script>
+</body>
+</html>
